@@ -1,0 +1,22 @@
+---
+
+- name: Install and Start Nginx
+  hosts: webservers
+  become: yes # Run tasks as sudo/root
+
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+	state: present
+	update_cache: yes
+
+    - name: Start Nginx service
+      service:
+        name: nginx
+	state: started
+
+    - name: Enable Nginx service at boot
+      service:
+        name: nginx
+	enabled: yes
